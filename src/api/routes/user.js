@@ -3,19 +3,18 @@ import express from 'express';
 // import authAdmin from '../middleware/authAdmin'
 
 import {
-  register,
-  activateEmail,
-  login,
-  updateUserRole
-} from '../controller/userController.js';
+  registerUser,
+  emailVerification,
+  loginUser
+} from '../controllers/user.js';
 
-const authRouter = express.Router();
+const userRoute = express.Router();
 
-authRouter.post('/register', register);
+userRoute.post('/register', registerUser);
 
-authRouter.post('/email-activate', activateEmail);
-authRouter.post('/login', login);
+userRoute.post('/email-activate', emailVerification);
+userRoute.post('/login', loginUser);
 
-// authRouter.post('/updaterole', userController.updateUserRole)
+// router.post('/updaterole', userController.updateUserRole)
 
-export default authRouter;
+export { userRoute };

@@ -5,15 +5,6 @@ const signupToken = (payload) => {
   const token = jwt.sign(payload, process.env.JWT_ACC_ACTIVATE, {
     expiresIn: '20m'
   });
-  res.cookie('token', token, {
-    httpOnly: true
-  });
-
-  res.status(statusCode).json({
-    status: 'success',
-    token,
-    welcome: `Welcome ${user.name}`
-  });
 };
 
 const loginToken = (payload) => {
@@ -22,4 +13,4 @@ const loginToken = (payload) => {
   });
 };
 
-export { signpToken, loginToken };
+export { signupToken, loginToken };

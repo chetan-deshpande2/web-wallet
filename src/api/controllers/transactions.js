@@ -20,30 +20,31 @@ const wallet = new ethers.Wallet(privateKey, provider);
 const walletConnect = await contract.connect(wallet);
 
 const claimBonus = asyncWrapper(async (req, res, next) => {
-  const { address, user } = req.body;
+  let { address, user } = req.body;
   const amount = '100000000000000000000';
   const balance = await contract.balanceOf(address);
   console.log(ethers.utils.formatEther(balance));
+  user = User.findOne({ email });
 
-  // if ((user.reward = false)) {
-  //   user.reward == true;
-  // await user.save();
-  const tx = await walletConnect.transfer(address, amount);
-  await tx.wait();
-  console.log(tx);
-  const transaction = new Transactions({
-    transactionHash: tx.hash,
-    sendersAddress: account1,
-    receiverAddress: address,
-    amount: amount
-  });
-  await transaction.save();
-  res.json({
-    msg: 'Bonus amount transferred successfully',
-    transactionDetails: transaction
-  });
-  //   }
-  // res.status(400).json({ msg: `Bonus Already claimed` });
+  if ((user.reward = false)) {
+    user.reward == true;
+    await user.save();
+    const tx = await walletConnect.transfer(address, amount);
+    await tx.wait();
+    console.log(tx);
+    const transaction = new Transactions({
+      transactionHash: tx.hash,
+      sendersAddress: account1,
+      receiverAddress: address,
+      amount: amount
+    });
+    await transaction.save();
+    res.json({
+      msg: 'Bonus amount transferred successfully',
+      transactionDetails: transaction
+    });
+  }
+  res.status(400).json({ msg: `Bonus Already claimed` });
 });
 
 const transferFunds = asyncWrapper(async (req, res, next) => {

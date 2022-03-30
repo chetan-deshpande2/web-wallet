@@ -9,11 +9,11 @@ E-Wallet Rest Api Example. Using Node.js, Express and MongoDB.
 
 ## Installation
 
-Install wallet-api with npm
+Install wallet-api with yarn
 
 ```bash
   cd wallet-api
-  npm install wallet-api
+ yarn wallet-api
 ```
     
 ## Run Locally
@@ -33,13 +33,13 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  npm install
+  yarn 
 ```
 
 Start the server
 
 ```bash
-  npm run start:dev
+  yarn run start:dev
 ```
 
 

@@ -1,7 +1,7 @@
-import 'dotenv/config';
 import mailgun from 'mailgun-js';
+import 'dotenv/config';
 
-const sendMail = (email, url) => {
+const transactionSuccessMail = (email, tx) => {
   const mg = mailgun({
     apiKey: process.env.MAILGUN_API_KEY,
     domain: process.env.MAILGUN_DOMAIN
@@ -9,18 +9,14 @@ const sendMail = (email, url) => {
 
   const sendFrom = 'noreply@demo.com';
   const userEmail = email;
-  const confirmUrl = url;
-  const htmlCode = ` <html>
-  <body>
-  <p>Please verify your email address:</p> <b> ${confirmUrl} </b>
+  const details = tx;
 
-  </body>
-  </html>`;
-  console.log(userEmail);
+  const htmlCode = `Transaction Successful ${details}`;
+
   const mailOptions = {
     from: sendFrom,
     to: userEmail,
-    subject: 'email verification',
+    subject: 'Transaction Details',
     html: htmlCode
   };
 
@@ -32,4 +28,4 @@ const sendMail = (email, url) => {
   });
 };
 
-export default sendMail;
+export { transactionSuccessMail };

@@ -7,6 +7,7 @@ import sendMail from '../utils/mail.js';
 import User from '../models/userModel.js';
 import Transactions from '../models/transactionModel.js';
 import { contract } from '../utils/tokenAddress.js';
+import { transactionSuccessMail } from '../utils/transactionMail.js';
 
 const account1 = process.env.ADMIN_ACCOUNT;
 
@@ -54,9 +55,6 @@ const transferFunds = asyncWrapper(async (req, res, next) => {
   const tx = await walletConnect.transfer(receiverAddress, amount);
   await tx.wait();
   console.log(tx);
-
-  // const balanceOfSender = await contract.balanceOf(sendersAddress);
-  // console.log('\nbalance of sender', ethers.utils.formatEther(balanceOfSender));
   const balanceOfReceiver = await contract.balanceOf(receiverAddress);
   console.log(
     'balance of receiver',
@@ -69,7 +67,9 @@ const transferFunds = asyncWrapper(async (req, res, next) => {
     receiverAddress: receiverAddress,
     amount: amount
   });
+
   await transaction.save();
+  await transactionSuccessMail(email, tx);
 
   res.json(tx);
 });

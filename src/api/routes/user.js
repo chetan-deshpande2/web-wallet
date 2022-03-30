@@ -10,9 +10,14 @@ import {
 
 const userRoute = express.Router();
 
+//* to register user
 userRoute.post('/register', registerUser);
 
+//* to verify user
+
 userRoute.post('/email-activate', emailVerification);
+
+//* to login user
 userRoute.post('/login', loginUser);
 
 // router.post('/updaterole', userController.updateUserRole)

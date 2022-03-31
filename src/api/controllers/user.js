@@ -10,12 +10,12 @@ import sendMail from '../utils/mail.js';
 
 //! create new User
 
-const registerUser = asyncWrapper(async (req, res, next) => {
+const registerUser = asyncWrapper(async (error, req, res, next) => {
   const { name, email, password, privateKey, mnemonics, publicKey } = req.body;
 
   const user = await User.findOne({ email });
   if (user) {
-    return next(createCustomError('email already exists', 404));
+    return next(createCustomError(error.message, 404));
   }
   const hashedPassword = await bcrypt.hash(password, 12);
   let newUser = {

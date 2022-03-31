@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 
 // //! router import
 
@@ -12,7 +13,7 @@ import { transactionRoute } from './routes/transactions.js';
 const app = express();
 
 app.use(express.json());
-
+app.use(bodyParser.json());
 // !main routes
 
 app.use('/api/v1', userRoute);

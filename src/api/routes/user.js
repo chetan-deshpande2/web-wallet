@@ -7,6 +7,7 @@ import {
   emailVerification,
   loginUser
 } from '../controllers/user.js';
+import isAuth from '../middleware/isAuth.js';
 
 const userRoute = express.Router();
 
@@ -18,7 +19,7 @@ userRoute.post('/register', registerUser);
 userRoute.post('/email-activate', emailVerification);
 
 //* to login user
-userRoute.post('/login', loginUser);
+userRoute.post('/login', isAuth, loginUser);
 
 // router.post('/updaterole', userController.updateUserRole)
 

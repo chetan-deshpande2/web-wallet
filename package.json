@@ -19,7 +19,9 @@
     "jsonwebtoken": "^8.5.1",
     "mailgun-js": "^0.22.0",
     "mongoose": "^6.2.7",
-    "truffle-hdwallet-provider": "^1.0.17"
+    "truffle-hdwallet-provider": "^1.0.17",
+    "validator": "^13.7.0",
+    "winston": "^3.6.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.17.0",

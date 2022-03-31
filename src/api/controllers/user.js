@@ -86,7 +86,7 @@ const updateUserRole = asyncWrapper(async (req, res, next) => {
   if (!user) {
     return next(createCustomError('unable to update user', 404));
   }
-  res.json({ msg: 'role updated' });
+  res..status(200).json({ msg: 'role updated' });
 });
 
 export { registerUser, emailVerification, loginUser };

@@ -3,7 +3,6 @@ import { ethers } from 'ethers';
 
 import asyncWrapper from '../utils/asyncWrapper.js';
 import { createCustomError } from '../utils/appError.js';
-import sendMail from '../utils/mail.js';
 import User from '../models/userModel.js';
 import Transactions from '../models/transactionModel.js';
 import { contract } from '../utils/tokenAddress.js';
@@ -57,7 +56,7 @@ const transferFunds = asyncWrapper(async (req, res, next) => {
   await tx.wait();
   console.log(tx);
   const balanceOfReceiver = await contract.balanceOf(receiverAddress);
-  console.log(
+  console.success(
     'balance of receiver',
     ethers.utils.formatEther(balanceOfReceiver)
   );

@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 import asyncWrapper from '../utils/asyncWrapper.js';
 import { createCustomError } from '../utils/appError.js';
-import { signupToken, loginToken } from './token.js';
+import { signupToken, loginToken } from '../helpers/token.js';
 import sendMail from '../utils/mail.js';
 
 //! create new User
@@ -56,20 +56,21 @@ const emailVerification = asyncWrapper(async (req, res, next) => {
   res.status(200).json({ msg: 'Account activated Successfully' });
 });
 
-const loginUser = asyncWrapper(async (req, res, next) => {
+const loginUser = asyncWrapper(async (error, req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
+
   if (!user) {
     return next(createCustomError('user not found', 404));
   }
   const emailMatch = await bcrypt.compare(password, user.password);
 
   if (!emailMatch) {
-    return next(createCustomError('password does not match', 404));
+    return next(createCustomError(error.message, 404));
   }
   const userData = await getUserInfo(email);
   if (!userData) {
-    return next(createCustomError('User not found', 404));
+    return next(createCustomError(error.message, 404));
   }
 
   res.json(userData);
@@ -86,7 +87,7 @@ const updateUserRole = asyncWrapper(async (req, res, next) => {
   if (!user) {
     return next(createCustomError('unable to update user', 404));
   }
-  res..status(200).json({ msg: 'role updated' });
+  res.status(200).json({ msg: 'role updated' });
 });
 
 export { registerUser, emailVerification, loginUser };

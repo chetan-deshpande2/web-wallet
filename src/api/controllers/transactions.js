@@ -2,10 +2,10 @@ import 'dotenv/config';
 import { ethers } from 'ethers';
 
 import asyncWrapper from '../utils/asyncWrapper.js';
-import { createCustomError } from '../utils/appError.js';
+// import { createCustomError } from '../utils/appError.js';
 import User from '../models/userModel.js';
 import Transactions from '../models/transactionModel.js';
-import { contract } from '../utils/tokenAddress.js';
+import { contract } from '../middleware/tokenAddress.js';
 import { transactionSuccessMail } from '../utils/transactionMail.js';
 
 const account1 = process.env.ADMIN_ACCOUNT;

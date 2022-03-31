@@ -24,7 +24,7 @@ const transactionSuccessMail = (email, tx) => {
     if (error) {
       return;
     }
-    console.log(body);
+
   });
 };
 

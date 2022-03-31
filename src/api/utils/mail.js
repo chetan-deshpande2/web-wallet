@@ -28,7 +28,7 @@ const sendMail = (email, url) => {
     if (error) {
       return;
     }
-    console.log(body);
+
   });
 };
 
